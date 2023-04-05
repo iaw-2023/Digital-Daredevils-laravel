@@ -1,85 +1,34 @@
-## Pasos
+Para las preguntas de la entrega inicial:
 
-- clonar el repo https://github.com/iaw-2023/laravel-template y mantener como owner la organización de la materia.
-## parados en el directorio del repositorio recientemente clonado, ejecutar:
+- qué entidades se podrán actualizar: Producto, Categoria.
+- qué reportes se podrán generar o visualizar: Pedidos durante un determinado lapso de tiempo, pedidos de un determinado cliente.
+- qué entidades se podrán obtener por API: Producto, Categoria.
+- qué entidades se podrán modificar por API: Pedido, Detalles_Pedido.
 
-- `composer install`
-- `cp .env.example .env`
-- `php artisan key:generate`
-- `php artisan serve`
+- que información podrá ver el usuario: 
+ . Categorías que tienen productos:
+	. Productos dentro de cada categoría
+ . Carrito:
+	. Visualizar carrito (con los productos que contiene actualmente),
+	. Visualizar monto actual del carrito,
+ . Página <<Home>> donde se muestra al menos un ítem de cada categoría, seleccionando en base a los últimos cargados al sistema.
+ . Notificación de pedido efectuado.
+ . Página <<Franquicias>> donde se aprecien datos de contacto como teléfono, direcciones físicas, horarios de atención.
 
-Con el último comando, pueden acceder a http://127.0.0.1:8000/ y ver la cáscara de la aplicación Laravel
+- que acciones podrá realizar, ya sea la primera vez que ingrese a la aplicación como futuros accesos a la misma:
 
-### Requisitos
-
-- tener [composer](https://getcomposer.org/) instalado
-- tener [php](https://www.php.net/) instalado
-
-
-
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ . Navegar entre categorías, visualizando los productos disponibles en cada una.
+ . Navegar también desde y hacia las secciones de <<Franquicias>>, <<Home>>.
+ . Carrito:
+	. Agregar al carrito producto(s),
+	. Remover del carrito producto(s),
+	. Cambiar cantidad del producto en el carrito,
+	. Efectuar pedido
+	. Al reingresar, se le guardará el carrito.
+    
+Aclaraciones y decisiones de diseño:
+    - Se dejaron los seeders para la tabla de cada modelo en particular, aún si se realiza el seeding para las tablas intermedias o las que son resultado de relaciones entre modelos, a partir de un subconjunto de estos módulos de seeders (en sí, no se están usando actualmente todas las TableSeeders para la creación de seeders).
+    - Se optó por la solución económica para modelar la relación uno a muchos que hay entre Categoria y Producto, es decir, se almacena la llave foránea de Categoria en la tabla Producto, en vez de crear una tabla intermedia para la relación entre estos dos conjuntos de Entidades (Categoria y Producto).
+    - Se crean pedidos con una misma cantidad de productos ya que el rand() emplea un único seed para la generación de cada entidad en el conjunto de entidades: detalles_pedidos. Se decide dejarlo así porque es solo con fines de seeding y a modo de ejemplo. También se definen las entidades del conjunto de entidades: detalles_pedidos con una cantidad fijada en '1', también para simplificar el seeding.
+    - Para el seeding, se crea una cantidad fija de 5 categorías y 50 pedidos, donde cada pedido tiene hasta un máximo de 50 productos, y cada producto pertenece a una de estas categorías anteriormente mencionadas.
+    - Para los datos que populan los atributos de las entidades, en el Seeding, se utilizó la librería Faker que ya viene incorporada en PHP, aunque, en casos como el atributo 'talle' de Producto, se decidió crear un 'enumerado' de talles a mano para lograr un mejor entendimiento y legibilidad de las entidades en el conjunto 'Productos'.
