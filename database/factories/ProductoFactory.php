@@ -5,12 +5,19 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Producto;
 use App\Models\Categoria;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Producto>
  */
 class ProductoFactory extends Factory
 {
     protected $model=Producto::class;
+
+    private function rndCategoriaId() : int {
+        $idsCategoriasActuales = Categoria::pluck('id');
+        $idElegidoRnd = $idsCategoriasActuales->random();
+        return $idElegidoRnd;
+    }
 
     /**
      * Define the model's default state.
@@ -25,7 +32,7 @@ class ProductoFactory extends Factory
             'imagen'=>fake()->imageUrl(),
             'modelo'=>fake()->word,
             'marca'=>fake()->word,
-            'categoria_id'=>Categoria::factory(),
+            'categoria_id'=>$this->rndCategoriaId(),
         ];
     }
 }
