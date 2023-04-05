@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('producto_id')->constrained()
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
-            $table->integer('cantidad');
+            $table->integer('cantidad')->default(1);
             $table->timestamps();
         });
     }
