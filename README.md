@@ -1,3 +1,5 @@
+NOTA: Por favor, leer en el formato Raw que github permite.
+
 Para las preguntas de la entrega inicial:
 
 - qué entidades se podrán actualizar: Producto, Categoria.
