@@ -1,10 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PedidosController;
-use App\Http\Controllers\ProductosController;
-use App\Http\Controllers\CategoriasController;
-use App\Http\Controllers\DetallesPedidosController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +17,15 @@ use App\Http\Controllers\DetallesPedidosController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/pedidos', [PedidosController::class, 'index']);
-Route::get('/productos', [ProductosController::class, 'index']);
-Route::get('/categorias', [CategoriasController::class, 'index']);
-Route::get('/detallesPedidos', [DetallesPedidosController::class, 'index']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
