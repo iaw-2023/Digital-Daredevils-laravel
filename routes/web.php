@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PedidosController;
+use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\DetallesPedidosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/pedidos', [PedidosController::class, 'index']);
+Route::get('/productos', [ProductosController::class, 'index']);
+Route::get('/categorias', [CategoriasController::class, 'index']);
+Route::get('/detallesPedidos', [DetallesPedidosController::class, 'index']);
