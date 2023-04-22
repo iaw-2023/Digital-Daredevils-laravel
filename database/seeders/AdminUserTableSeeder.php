@@ -10,8 +10,8 @@ class AdminUserTableSeeder extends Seeder
     public function run(): void
     {
          User::create([
-            'name' => 'admin@iaw.com',
-            'email' => 'digitalDareDevilWeb@gmail.com',
+            'name' => 'admin',
+            'email' => 'admin@iaw.com',
             'password' =>  Hash::make('admin123')
         ]);
     }
