@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateCategoriaRequest;
 use App\Http\Requests\StoreCategoriaRequest;
+use App\Http\Controllers\Controller;
 
 class CategoriasController extends Controller
 {
@@ -14,7 +14,8 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        return view('categorias/index');
+        $categorias = Categoria::all();
+        return view('categorias/index')->with('categorias', $categorias);
     }
 
     /**
@@ -22,7 +23,7 @@ class CategoriasController extends Controller
      */
     public function create()
     {
-        //
+        return view('categorias/create');
     }
 
     /**
@@ -30,7 +31,8 @@ class CategoriasController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        //
+        Categoria::create($request->validated());
+        return back()->with('success','Categoria creada con éxito');
     }
 
     /**
@@ -38,7 +40,7 @@ class CategoriasController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        return view('categorias/show')->with('categoria',$categoria);
     }
 
     /**
@@ -46,7 +48,7 @@ class CategoriasController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        //
+        return view('categorias/edit')->with('categoria',$categoria);
     }
 
     /**
@@ -54,7 +56,8 @@ class CategoriasController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        //
+        $categoria->update($request->validated());
+        return back()->with('success','Categoría modificada con éxito');
     }
 
     /**
@@ -62,6 +65,7 @@ class CategoriasController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+        return back()->with('success','Categoría removida con éxito');
     }
 }
