@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Categoria extends Model
 {
-    protected $fillable = ['imagen','nombre','descripcion'];
+    protected $fillable = ['imagen_ruta','imagen_nombre_original','imagen_tamano','imagen_ancho','imagen_alto','nombre','descripcion'];
     protected $guarded = ['id'];
     
     use HasFactory;

@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Enums\Productos;
+
+use Illuminate\Validation\Rules\Enum;
+class TallesProducto extends Enum
+{
+    const XS = 'xs';
+    const S = 's';
+    const M = 'm';
+    const L = 'l';
+    const XL = 'xl';
+}
