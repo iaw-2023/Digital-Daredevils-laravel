@@ -19,7 +19,7 @@ class CategoriaFactory extends Factory
     public function definition(): array
     {
         return [
-            'imagen'=>fake()->imageUrl(),
+            'imagen_ruta'=>fake()->imageUrl(),
             'nombre'=>fake()->name(),
             'descripcion'=>fake()->text(50)
         ];

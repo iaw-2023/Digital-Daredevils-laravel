@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Enums\Productos\TallesProducto;
 use App\Models\Producto;
 use App\Models\Categoria;
 
@@ -27,9 +28,10 @@ class ProductoFactory extends Factory
     public function definition(): array
     {
         return [
+            // TODO 'talle'=>fake()->randomElement(TallesProducto::getValues()), problema <- benSampo? illuminate? instead of:
             'talle'=>fake()->randomElement(['xs', 's', 'm', 'l', 'xl']),
             'precio'=>fake()->randomFloat(2,0,500),
-            'imagen'=>fake()->imageUrl(),
+            'imagen_ruta'=>fake()->imageUrl(),
             'modelo'=>fake()->word,
             'marca'=>fake()->word,
             'categoria_id'=>$this->rndCategoriaId(),
