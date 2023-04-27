@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('marca');
             $table->foreignId('categoria_id')->constrained()
                   ->onUpdate('cascade')
-                  ->onDelete('cascade');
+                  ->onDelete('restrict');
             $table->timestamps();
         });
     }
