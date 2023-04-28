@@ -9,6 +9,25 @@
         <form action="/categorias" method="POST">
             @csrf
             <div class="mb-3">
+                <label  class="form-label">Talle</label>
+                <input type="text" name="talle" class="form-control @error('talle') is-invalid @enderror" value="{{old('talle')}}">
+                @error('talle')
+                    <span class="tex-danger">
+                    <strong>{{$message}}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label  class="form-label">Precio</label>
+                <input type="text" name="precio" class="form-control @error('precio') is-invalid @enderror" value="{{old('precio')}}">
+                @error('precio')
+                    <span class="tex-danger">
+                    <strong>{{$message}}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label  class="form-label">Imagen</label>
                 <input type="text" name="imagen_ruta" class="form-control @error('imagen_ruta') is-invalid @enderror" value="{{old('imagen_ruta')}}">
                 @error('imagen_ruta')
@@ -17,20 +36,19 @@
                     </span>
                 @enderror
             </div>
-
             <div class="mb-3">
-                <label  class="form-label">Nombre</label>
-                <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{old('nombre')}}">
-                @error('nombre')
+                <label  class="form-label">Modelo</label>
+                <input type="text" name="modelo" class="form-control @error('modelo') is-invalid @enderror" value="{{old('modelo')}}">
+                @error('modelo')
                     <span class="tex-danger">
                     <strong>{{$message}}</strong>
                     </span>
                 @enderror
             </div>
             <div class="mb-3">
-                <label  class="form-label">Descripcion</label>
-                <input type="text" name="descripcion" class="form-control @error('descripcion') is-invalid @enderror" value="{{old('descripcion')}}">
-                @error('descripcion')
+                <label  class="form-label">Marca</label>
+                <input type="text" name="marca" class="form-control @error('marca') is-invalid @enderror" value="{{old('marca')}}">
+                @error('marca')
                     <span class="tex-danger">
                     <strong>{{$message}}</strong>
                     </span>

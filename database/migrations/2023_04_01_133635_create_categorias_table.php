@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->text('imagen_ruta')->nullable();
-            $table->string('imagen_nombre_original')->nullable();
-            $table->unsignedBigInteger('imagen_tamano')->nullable();
-            $table->unsignedInteger('imagen_ancho')->nullable();
-            $table->unsignedInteger('imagen_alto')->nullable();
             $table->string('nombre');
             $table->string('descripcion');
             $table->timestamps();

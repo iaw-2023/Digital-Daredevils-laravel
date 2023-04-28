@@ -11,8 +11,8 @@
             @method('PUT')
             <div class="mb-3">
                 <label  class="form-label">Imagen</label>
-                <input type="text" name="imagen" class="form-control @error('imagen') is-invalid @enderror" value="{{$categoria->imagen}}">
-                @error('imagen')
+                <input type="text" name="imagen_ruta" class="form-control @error('imagen_ruta') is-invalid @enderror" value="{{$categoria->imagen_ruta}}">
+                @error('imagen_ruta')
                     <span class="tex-danger">
                     <strong>{{$message}}</strong>
                     </span>

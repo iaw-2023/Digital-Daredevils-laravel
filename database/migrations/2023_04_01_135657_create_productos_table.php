@@ -16,10 +16,6 @@ return new class extends Migration
             $table->string('talle');
             $table->decimal('precio', 7, 2);
             $table->text('imagen_ruta')->nullable();
-            $table->string('imagen_nombre_original')->nullable();
-            $table->unsignedBigInteger('imagen_tamano')->nullable();
-            $table->unsignedInteger('imagen_ancho')->nullable();
-            $table->unsignedInteger('imagen_alto')->nullable();
             $table->string('modelo');
             $table->string('marca');
             $table->foreignId('categoria_id')->constrained()

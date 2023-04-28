@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Producto extends Model
 {
-    protected $fillable = ['talle','precio','imagen_ruta','imagen_nombre_original','imagen_tamano','imagen_ancho','imagen_alto','modelo','marca'];
+    protected $fillable = ['talle','precio','imagen_ruta','modelo','marca'];
     protected $guarded = ['id', 'categoria_id'];
 
     use HasFactory;
