@@ -26,12 +26,7 @@ class StoreProductoRequest extends FormRequest
         return [
             'talle' => 'required', [new Enum(TallesProducto::class)],
             'precio' => 'required|decimal:2|max:1000000',
-            'imagen' => [
-                'nullable',
-                'file',
-                'max:2048', // máximo tamaño del archivo en kilobytes
-                'dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000' // tamaño de la imagen en píxeles
-            ],
+            'imagen_ruta' => ['nullable', 'url', 'image', 'dimensions:min_width=50,min_height=50'],
             'modelo' => 'required|max:100',
             'marca' => 'required|max:100'
         ];

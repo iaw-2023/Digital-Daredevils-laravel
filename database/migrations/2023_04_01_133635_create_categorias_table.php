@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->text('imagen_ruta')->nullable();
+            $table->string('imagen_ruta')->nullable();
             $table->string('nombre');
             $table->string('descripcion');
             $table->timestamps();

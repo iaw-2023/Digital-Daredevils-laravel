@@ -28,8 +28,7 @@ class ProductoFactory extends Factory
     public function definition(): array
     {
         return [
-            // TODO 'talle'=>fake()->randomElement(TallesProducto::getValues()), problema <- benSampo? illuminate? instead of:
-            'talle'=>fake()->randomElement(['xs', 's', 'm', 'l', 'xl']),
+            'talle'=>fake()->randomElement(TallesProducto::getValues()),
             'precio'=>fake()->randomFloat(2,0,500),
             'imagen_ruta'=>fake()->imageUrl(),
             'modelo'=>fake()->word,

@@ -1,9 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Enums\Productos;
-
-use Illuminate\Validation\Rules\Enum;
-class TallesProducto extends Enum
+use BenSampo\Enum\Enum;
+final class TallesProducto extends Enum
 {
     const XS = 'xs';
     const S = 's';

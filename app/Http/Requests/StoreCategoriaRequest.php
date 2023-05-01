@@ -22,12 +22,7 @@ class StoreCategoriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'imagen' => [
-                'nullable',
-                'file',
-                'max:2048', // máximo tamaño del archivo en kilobytes
-                'dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000' // tamaño de la imagen en píxeles
-            ],
+            'imagen_ruta' => ['nullable', 'url', 'image', 'dimensions:min_width=50,min_height=50'],
             'nombre' => 'required|max:50|unique:categorias',
             'descripcion' => 'required|max:255'
         ];
