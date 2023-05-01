@@ -3,6 +3,10 @@
 @section('content')
 <div class="container">
     @include('messages')
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Productos') }}
+    </h2>
+    <a href="/productos/create" class="btn btn-success">Create</a>
 <table class="table">
   <thead>
     <tr>

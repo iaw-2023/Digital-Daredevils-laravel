@@ -9,6 +9,7 @@
         <p class="card-text">Talle = {{$producto->talle}}</p>
         <p class="card-text">Precio = {{$producto->precio}}</p>
         <p class="card-text">Marca = {{$producto->marca}}</p>
+        <a href="/productos" class="btn btn-success">Go Back</a>
 
     </div>
     </div>

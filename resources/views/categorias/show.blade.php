@@ -7,7 +7,7 @@
     <div class="card-body">
         <h5 class="card-title">Nombre = {{$categoria->nombre}}</h5>
         <p class="card-text">Descripcion = {{$categoria->descripcion}}</p>
-
+        <a href="/categorias" class="btn btn-success">Go Back</a>
     </div>
     </div>
 </div>

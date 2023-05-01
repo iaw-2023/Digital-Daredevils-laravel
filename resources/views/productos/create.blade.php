@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <div class="card col-6 offset-3">
-    <h5 class="card-header">Add Categoria</h5>
+    <h5 class="card-header">Add </h5>
     <div class="card-body">
     @include('messages')
-        <form action="/categorias" method="POST">
+        <form action="/productos" method="POST">
             @csrf
             <div class="mb-3">
                 <label  class="form-label">Talle</label>
@@ -56,6 +56,7 @@
             </div>
             <div class ="mb-3">
                 <button type="submit" class="btn btn-success">Submit</button>
+                <a href="/productos" class="btn btn-success">Go Back</a>
             </div>
         </form>
     </div>

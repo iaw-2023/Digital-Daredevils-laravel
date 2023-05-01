@@ -38,6 +38,7 @@
             </div>
             <div class ="mb-3">
                 <button type="submit" class="btn btn-success">Submit</button>
+                <a href="/categorias" class="btn btn-success">Go Back</a>
             </div>
         </form>
     </div>

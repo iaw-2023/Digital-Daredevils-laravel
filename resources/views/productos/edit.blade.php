@@ -57,6 +57,8 @@
             </div>
             <div class ="mb-3">
                 <button type="submit" class="btn btn-success">Submit</button>
+                <a href="/productos" class="btn btn-success">Go Back</a>
+            </div>
             </div>
         </form>
     </div>
