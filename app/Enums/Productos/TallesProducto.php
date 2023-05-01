@@ -1,7 +1,9 @@
 <?php declare(strict_types=1);
 
 namespace App\Enums\Productos;
+
 use BenSampo\Enum\Enum;
+
 final class TallesProducto extends Enum
 {
     const XS = 'xs';
