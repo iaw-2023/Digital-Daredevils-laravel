@@ -13,6 +13,16 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- App Icon -->
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+
+    <!-- Nav-Bar Background -->
+    <style>
+        body {
+            background-image: url('/background.jpg');
+            background-size: cover;
+        }
+    </style>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -21,8 +31,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                    <img src="{{ asset('favicon.png') }}" alt="Logo" style="height: 16px; width: 16px; margin-right: 6px; margin-bottom: 3px">
+                    <span>{{ config('app.name', 'Laravel') }}</span>
+                </a>                             
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

@@ -56,8 +56,8 @@
                 @enderror
             </div>
             <div class ="mb-3">
+                <a href="/productos" class="btn btn-light">Go Back</a>
                 <button type="submit" class="btn btn-success">Submit</button>
-                <a href="/productos" class="btn btn-success">Go Back</a>
             </div>
             </div>
         </form>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="card col-6 offset-3">
-    <h5 class="card-header">Add Categoria</h5>
+    <h5 class="card-header">Nueva categoría</h5>
     <div class="card-body">
     @include('messages')
         <form action="/categorias" method="POST">
@@ -37,8 +37,8 @@
                 @enderror
             </div>
             <div class ="mb-3">
+                <a href="/categorias" class="btn btn-light">Go Back</a>
                 <button type="submit" class="btn btn-success">Submit</button>
-                <a href="/categorias" class="btn btn-success">Go Back</a>
             </div>
         </form>
     </div>

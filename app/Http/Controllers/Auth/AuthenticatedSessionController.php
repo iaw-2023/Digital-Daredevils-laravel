@@ -27,6 +27,12 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if (session()->has('showLoggedInMessage')) {
+            session()->flash('showLoggedInMessage', false);
+        } 
+        else {
+            session()->flash('showLoggedInMessage', true);
+        }
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
