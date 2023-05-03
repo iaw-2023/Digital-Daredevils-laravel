@@ -16,13 +16,7 @@
     <!-- App Icon -->
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 
-    <!-- Nav-Bar Background -->
-    <style>
-        body {
-            background-image: url('/background.jpg');
-            background-size: cover;
-        }
-    </style>
+   
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
