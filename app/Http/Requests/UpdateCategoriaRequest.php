@@ -22,7 +22,7 @@ class UpdateCategoriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'imagen_ruta' => ['nullable', 'url', 'dimensions:min_width=50,min_height=50'],
+            'imagen_ruta' => ['nullable', 'url'],
             'nombre' => 'required|max:50|unique:categorias',
             'descripcion' => 'required|max:255'
         ];
