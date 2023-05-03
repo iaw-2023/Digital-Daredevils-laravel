@@ -21,10 +21,6 @@ class UpdateCategoriaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'imagen_ruta' => ['nullable', 'url'],
-            'nombre' => 'required|max:50|unique:categorias',
-            'descripcion' => 'required|max:255'
-        ];
+        return CategoriasRequestRules::getValidationRules();
     }
 }
