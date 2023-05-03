@@ -24,11 +24,12 @@ class UpdateProductoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'talle' => 'required', [new Enum(TallesProducto::class)],
             'precio' => 'required|decimal:2|max:1000000',
-            'imagen_ruta' => ['nullable', 'url', 'image', 'dimensions:min_width=50,min_height=50'],
+            'imagen_ruta' => ['nullable', 'url', 'dimensions:min_width=50,min_height=50'],
             'modelo' => 'required|max:100',
-            'marca' => 'required|max:100'
+            'marca' => 'required|max:100',
+            'talle' => 'required', [new Enum(TallesProducto::class)],
+            'categoria_id' => 'required|not_in:0|exists:categorias,id' // not_in:0 por el selected hidden value: 'selecciona categoria'
         ];
     }
 }

@@ -27,6 +27,7 @@
                     </span>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label  class="form-label">Descripcion</label>
                 <input type="text" name="descripcion" class="form-control @error('descripcion') is-invalid @enderror" value="{{old('descripcion')}}">
@@ -36,6 +37,7 @@
                     </span>
                 @enderror
             </div>
+
             <div class ="mb-3">
                 <a href="/categorias" class="btn btn-light">Go Back</a>
                 <button type="submit" class="btn btn-success">Submit</button>
