@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Producto extends Model
 {
-    protected $fillable = ['talle','precio','imagen_ruta','modelo','marca'];
-    protected $guarded = ['id', 'categoria_id'];
+    protected $fillable = ['talle','precio','imagen_ruta','modelo','marca', 'categoria_id'];
+    protected $guarded = ['id'];
 
     use HasFactory;
     
