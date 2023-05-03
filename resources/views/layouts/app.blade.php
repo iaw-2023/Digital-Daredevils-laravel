@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('favicon.png') }}" alt="Logo" style="height: 16px; width: 16px; margin-right: 6px; margin-bottom: 3px">
+                    <img src="{{ asset('favicon.png') }}" alt="Logo" style="height: 30px; width: 45px; margin-right: 6px; margin-bottom: 3px">
                     <span>{{ config('app.name', 'Laravel') }}</span>
                 </a>                             
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -52,14 +52,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            @endif                
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="/categorias">Categoria</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="/productos">Productos</a>
+                            </li>
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
