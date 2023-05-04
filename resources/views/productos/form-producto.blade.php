@@ -7,7 +7,7 @@
     <label class="form-label">Precio</label>
     <div class="input-group">
         <span class="input-group-text">$</span>
-        <input type="number" name="precio" class="form-control @error('precio') is-invalid @enderror" value="{{ old('precio') ? old('precio') : '0' }}" min="0" step="1000">
+        <input type="number" name="precio" class="form-control @error('precio') is-invalid @enderror" value="{{ old('precio') ? old('precio') : '0' }}" min="0">
     </div>
     @error('precio')
         <span class="text-danger">
@@ -47,8 +47,8 @@
 </div>
 
 <div class="form-group mb-3">
-    <label class="form-label" for="categoria">Categoría</label>
-    <select id="categoria" name="categoria" class="form-select @error('categoria') is-invalid @enderror">
+    <label class="form-label" for="categoria_id">Categoría</label>
+    <select id="categoria_id" name="categoria_id" class="form-select @error('categoria_id') is-invalid @enderror">
         <option value="0" selected hidden>Seleccione la categoría</option>
         @foreach(Categoria::all() as $categoria)
             <option value="{{ $categoria->id }}" {{ old('categoria') == $categoria->id ? 'selected' : '' }}>
