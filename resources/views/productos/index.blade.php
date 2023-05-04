@@ -34,9 +34,9 @@
         <th scope="row">{{$producto->id}}</th>
         <td>{{$producto->talle}}</td>
         <td>{{$producto->precio}}</td>
-        <td>{{$producto->imagen_ruta}}</td>
         <td>{{$producto->modelo}}</td>
         <td>{{$producto->marca}}</td>
+        <td>{{$producto->categoria_id}}</td>
         <td>
           <form action="/productos/{{$producto->id}}" method="POST">
               @method('DELETE')
