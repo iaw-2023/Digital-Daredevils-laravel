@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('favicon.png') }}" alt="Logo" style="height: 30px; width: 45px; margin-right: 6px; margin-bottom: 3px">
+                    <img src="{{ asset('view_images/favicon.png') }}" alt="Logo" style="height: 30px; width: 45px; margin-right: 6px; margin-bottom: 3px">
                     <span>{{ config('app.name', 'Laravel') }}</span>
                 </a>                             
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
