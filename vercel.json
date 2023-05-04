@@ -18,10 +18,7 @@
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
-        },
-        {
-            "public": "public"
-        }        
+        }    
     ],
     "env": {
         "APP_NAME": "AB Clothing Store",
