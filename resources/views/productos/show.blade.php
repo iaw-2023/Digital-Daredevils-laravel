@@ -2,15 +2,17 @@
 
 @section('content')
 <div class="container">
-    <div class="card col-6 offset-3">
-        <h5 class="card-header">{{$producto->modelo}}</h5>
+    <div class="card col-5 offset-3">
+        <h2 class="card-header">{{$producto->modelo}}</h2>
         <div class="card-body">
-            <img class="card-img-top img-fluid" src="{{$producto->imagen_ruta}}" alt="Imagen del producto" style="max-width: 300px;max-height: 300px">
-            <p class="card-text">Talle = {{$producto->talle}}</p>
-            <p class="card-text">Precio = {{$producto->precio}}</p>
-            <p class="card-text">Marca = {{$producto->marca}}</p>
-            <p class="card-text">Categoria = {{$producto->categoria_id}}</p>
-            <a href="/productos" class="btn btn-success">Go Back</a>
+            <h4 class="card-text text-center">
+                <img class="card-img-top img-fluid imagenesShow" src="{{$producto->imagen_ruta}}" alt="Imagen del producto" >
+            </h4>
+            <h5 class="card-text"> {{$producto->talle}}</h5>
+            <h5 class="card-text"> {{$producto->precio}}</h5>
+            <h5 class="card-text"> {{$producto->marca}}</h5>
+            <h5 class="card-text"> {{$producto->categoria_id}}</h5>
+            <h5 href="/productos" class="btn btn-dark">Go Back</h5>
         </div>
     </div>
 </div>

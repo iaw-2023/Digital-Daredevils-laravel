@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ALBBRU') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,12 +22,14 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light navigationbar shadow-sm">
             <div class="container">
+
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('view_images/favicon.png') }}" alt="Logo" style="height: 30px; width: 45px; margin-right: 6px; margin-bottom: 3px">
-                    <span>{{ config('app.name', 'Laravel') }}</span>
-                </a>                             
+                    <img src="{{ asset('view_images/favicon.png') }}" alt="Logo" height="50" width="70">
+                    <span>{{ config('app.name', 'ALBBRU') }}</span>
+                </a>      
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -37,7 +39,6 @@
                     <ul class="navbar-nav me-auto">
 
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
