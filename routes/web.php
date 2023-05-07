@@ -29,4 +29,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('categorias',CategoriasController::class);
 });
 
+Route::get('/api-documentation', function () {
+    return view('api-documentation');
+});
+
+
 require __DIR__.'/auth.php';

@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: AB Clothing Store - API Documentation
+  description: |-
+    API documentation for the AB Clothing Store. Here you will find all the information about the endpoints the project provides and what they may be used for. 
+  version: 1.0.11
+servers:
+  - url: digital-daredevils-laravel-cp28gjs6d-digitaldaredevils.vercel.app/restApi/
+tags:
+  - name: productos
+    description: This endpoint provides all the information about the store's products.
+  - name: categorias
+    description: This endpoint provides all the information about the store's categories.
+paths:
+  /productos:
+    get:
+      tags:
+        - productos
+      summary: Gets all the available products the clothing store has.
+      operationId: getProductos
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+        '404':
+          description: Product not found
+        '500':
+          description: Server error
+  /categorias:
+    get:
+      tags:
+        - categorias
+      summary: Gets all the available categories the clothing store has.
+      operationId: getCategorias
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'   
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'
+        '404':
+          description: Category not found
+components:
+  schemas:
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        imagen_ruta:
+          type: string
+          example: 'https:\/\/via.placeholder.com\/640x480.png\/001122?text=aperiam'
+        nombre:
+          type: string
+          example: 'Shirts'
+        descripcion:
+          type: string
+          example: 'Fall-Winter fashioned shirts that let you be your greatest self!'
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-04T17:40:45.000000Z'
+      xml:
+        name: categoria
+    Producto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        talle:
+          type: string
+          example: 'xs'
+          description: 'talle del producto en la tienda'
+          enum:
+            - xs
+            - s
+            - m
+            - l
+            - xl
+        precio:
+          type: number
+          format: double
+          example: 1050.99
+        imagen_ruta:
+          type: string
+          example: 'https:\/\/via.placeholder.com\/640x480.png\/001122?text=aperiam'
+        modelo:
+          type: string
+          example: 'Juan Shirt'
+        marca:
+          type: string
+          example: 'Juan Brand'
+        categoria_id:
+          type: integer
+          format: int64
+          description: 'The Categoria object that this Producto object belongs to'
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-04T17:40:45.000000Z'
+      xml:
+        name: producto
