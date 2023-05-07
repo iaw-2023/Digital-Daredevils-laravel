@@ -9,11 +9,11 @@
 </div>
 
 <div class="mb-3">
-    <label  class="form-label">Nombre</label>
-    <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror bg-white" value="{{ isset($categoria) ? $categoria->nombre : old('nombre')}}">
+    <label class="form-label">Nombre</label>
+    <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror bg-white" value="{{ isset($categoria) ? $categoria->nombre : old('nombre') }}">
     @error('nombre')
         <span class="tex-danger">
-        <strong>{{$message}}</strong>
+        <strong>{{ $message }}</strong>
         </span>
     @enderror
 </div>
