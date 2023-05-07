@@ -14,7 +14,6 @@
       <div style="height: 2px; background: repeating-linear-gradient(to right, red, red 250px, white 250px, white 500px); border-radius: 7px;"></div>
     </div>
   </div>
-
   
   <table class="table">
     <thead>
@@ -22,9 +21,9 @@
         <th scope="col">#</th>
         <th scope="col">Talle</th>
         <th scope="col">Precio</th>
-        <th scope="col">Imagen</th>
         <th scope="col">Modelo</th>
         <th scope="col">Marca</th>
+        <th scope="col">Categoría</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -36,7 +35,7 @@
         <td>{{$producto->precio}}</td>
         <td>{{$producto->modelo}}</td>
         <td>{{$producto->marca}}</td>
-        <td>{{$producto->categoria_id}}</td>
+        <td>{{$producto->categoria->nombre}}</td>
         <td>
           <form action="/productos/{{$producto->id}}" method="POST">
               @method('DELETE')
@@ -50,5 +49,6 @@
       @endforeach
     </tbody>
   </table>
+  {{ $productos->links() }}
 </div>
 @endsection
