@@ -13,6 +13,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
     <!-- App Icon -->
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 

@@ -1,6 +1,7 @@
 @extends('layouts/app')
 
 @section('content')
+
 <div class="container" > 
   @include('messages')
   <h1 class="font-semibold text-xl text-white dark:text-gray-200 leading-tight text-center">
@@ -43,6 +44,8 @@
       @endforeach
     </tbody>
   </table>
-  {{ $productos->links() }}
+  <div class="pagination-container">
+    {{ $productos->links() }}
+  </div>
 </div>
 @endsection
