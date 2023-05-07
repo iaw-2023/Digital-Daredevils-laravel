@@ -14,7 +14,7 @@ class CategoriasController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::paginate(24);
         return view('categorias/index')->with('categorias', $categorias);
     }
 

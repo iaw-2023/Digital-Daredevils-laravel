@@ -37,5 +37,8 @@
       @endforeach
     </tbody>
   </table>
+  <div class="pagination-container">
+    {{ $categorias->links() }}
+  </div>
 </div>
 @endsection
