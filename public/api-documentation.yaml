@@ -11,6 +11,8 @@ tags:
     description: This endpoint provides all the information about the store's products.
   - name: categorias
     description: This endpoint provides all the information about the store's categories.
+  - name: pedidos
+    description: This endpoint provides all the information about the store's pedidos.
 paths:
   /productos:
     get:
@@ -58,6 +60,88 @@ paths:
                   $ref: '#/components/schemas/Categoria'
         '404':
           description: Category not found
+  /storePedido:
+    post:
+      tags:
+        - pedidos
+      summary: Add a new pedido to the store
+      operationId: storePedido
+      requestBody:
+        description: Create a new pedido in the store
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pedido:
+                  $ref: '#/components/schemas/Pedido'
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      producto:
+                        $ref: '#/components/schemas/Producto'
+                      cantidad:
+                        type: integer
+                        minimum: 1
+                        example: 2
+              required:
+                - pedido
+                - productos
+          application/xml:
+            schema:
+              type: object
+              properties:
+                pedido:
+                  $ref: '#/components/schemas/Pedido'
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      producto:
+                        $ref: '#/components/schemas/Producto'
+                      cantidad:
+                        type: integer
+                        minimum: 1
+                        example: 2
+              required:
+                - pedido
+                - productos
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                pedido:
+                  $ref: '#/components/schemas/Pedido'
+                productos:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      producto:
+                        $ref: '#/components/schemas/Producto'
+                      cantidad:
+                        type: integer
+                        minimum: 1
+                        example: 2
+              required:
+                - pedido
+                - productos
+      responses:
+        '201':
+          description: Successfully created a pedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pedido'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pedido'
+        '405':
+          description: Invalid input
 components:
   schemas:
     Categoria:
@@ -135,3 +219,31 @@ components:
           example: '2023-05-04T17:40:45.000000Z'
       xml:
         name: producto
+    Pedido:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        cliente:
+          type: string
+          example: 'juancito@gmail.com'
+          description: 'Email del cliente asociado al pedido'
+        fecha:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-04T17:40:45.000000Z'
+      xml:
+        name: pedido
