@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class CategoriasRequestRules
+class CategoriasRequestRulesStore
 {
     public static function getValidationRules(): array
     {

@@ -21,6 +21,6 @@ class UpdateCategoriaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return CategoriasRequestRules::getValidationRules();
+        return CategoriasRequestRulesEdit::getValidationRules($this->categoria);
     }
 }

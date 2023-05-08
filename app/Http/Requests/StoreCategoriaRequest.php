@@ -21,6 +21,6 @@ class StoreCategoriaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return CategoriasRequestRules::getValidationRules();
+        return CategoriasRequestRulesStore::getValidationRules();
     }
 }
