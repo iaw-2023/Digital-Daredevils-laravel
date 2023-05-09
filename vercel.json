@@ -16,9 +16,13 @@
             "dest": "/view_images/$1"
         },
         {
+            "src": "/dist/(.*)",
+            "dest": "/dist/$1"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
-        }    
+        }      
     ],
     "env": {
         "APP_NAME": "AB Clothing Store",
