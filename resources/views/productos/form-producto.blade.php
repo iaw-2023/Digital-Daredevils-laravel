@@ -51,7 +51,7 @@
     <select id="categoria_id" name="categoria_id" class="form-select @error('categoria_id') is-invalid @enderror bg-white">
         <option value="0" selected hidden>Seleccione la categoría</option>
         @foreach(Categoria::all() as $categoria)
-            <option value="{{ $categoria->id }}" {{ (old('categoria_id', $producto->categoria_id) == $categoria->id) ? 'selected' : '' }}>
+            <option value="{{ $categoria->id }}" {{ (old('categoria_id') ?? (isset($producto) && $producto->categoria_id == $categoria->id)) ? 'selected' : '' }}>
                 {{ $categoria->nombre }}
             </option>
         @endforeach
