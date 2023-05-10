@@ -35,7 +35,36 @@ paths:
                 items:
                   $ref: '#/components/schemas/Producto'
         '404':
-          description: Product not found
+          description: Productos no encontrados
+        '500':
+          description: Server error
+  /productos/{idProducto}:
+    get:
+      tags:
+        - productos
+      summary: Gets information about a single product.
+      parameters:
+        - name: idProducto
+          in: path
+          description: identificador del producto a obtener
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 2
+      operationId: getProductoById
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Producto'
+        '404':
+          description: Producto no encontrado
         '500':
           description: Server error
   /categorias:
@@ -59,12 +88,43 @@ paths:
                 items:
                   $ref: '#/components/schemas/Categoria'
         '404':
-          description: Category not found
+          description: Categorias no encontradas
+        '500':
+          description: Server error
+  /categorias/{idCategoria}:
+    get:
+      tags:
+        - categorias
+      summary: Gets information about a single category.
+      parameters:
+        - name: idCategoria
+          in: path
+          description: identificador de la categoría a obtener
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 2
+      operationId: getCategoriaById
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '404':
+          description: Categoria no encontrada
+        '500':
+          description: Server error
   /storePedido:
     post:
       tags:
         - pedidos
-      summary: Add a new pedido to the store
+      summary: Adds a new pedido to the store
       operationId: storePedido
       requestBody:
         description: Create a new pedido in the store
@@ -132,7 +192,7 @@ paths:
                 - productos
       responses:
         '201':
-          description: Successfully created a pedido
+          description: Pedido creado exitosamente
           content:
             application/json:
               schema:
@@ -140,8 +200,8 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/Pedido'
-        '405':
-          description: Invalid input
+        '500':
+          description: No se pudo crear el pedido
 components:
   schemas:
     Categoria:

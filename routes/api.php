@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/productos',[ApiController::class,'productos']);
+Route::get('/categoria/{id}',[ApiController::class,'categoria']);
 Route::get('/categorias',[ApiController::class,'categorias']);
+Route::get('/producto/{id}',[ApiController::class,'producto']);
+Route::get('/productos',[ApiController::class,'productos']);
 Route::get('/storePedido',[ApiController::class,'storePedido']);
