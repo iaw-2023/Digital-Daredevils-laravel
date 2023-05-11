@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\CategoriasController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('productos',ProductosController::class);
     Route::resource('categorias',CategoriasController::class);
+    Route::resource('pedidos',PedidosController::class)->except([
+        'create', 'store', 'update', 'destroy'
+    ]);
 });
 
 Route::get('/api-documentation', function () {

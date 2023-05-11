@@ -120,7 +120,7 @@ paths:
           description: Categoria no encontrada
         '500':
           description: Server error
-  /storePedido:
+  /pedidos:
     post:
       tags:
         - pedidos

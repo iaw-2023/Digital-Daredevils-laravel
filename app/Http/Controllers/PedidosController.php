@@ -12,7 +12,8 @@ class PedidosController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        return view('pedidos/index');
+        $pedidos = Pedido::paginate(12);
+        return view('pedidos/index')->with('pedidos', $pedidos);
     }
 
     /**
@@ -34,9 +35,9 @@ class PedidosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pedido $pedido)
+    public function show(DetallesPedido $detallesPedido)
     {
-        //
+        return view('pedidos/show')->with('detallesPedido',$detallesPedido);
     }
 
     /**
