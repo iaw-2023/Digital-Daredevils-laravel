@@ -6,7 +6,7 @@
         <h2 class="card-header">{{$producto->modelo}}</h2>
         <div class="card-body">
             <h4 class="card-text text-center">
-                <img class="card-img-top img-fluid imagenesShow" src="{{$producto->imagen_ruta}}" alt="Imagen del producto" >
+                <img class="card-img-top img-fluid imagenesShow" src="{{$producto->imagen_ruta}}" alt="Imagen del producto" width="300" height="300">
             </h4>
             <h5 class="card-text"> {{$producto->talle}}</h5>
             <h5 class="card-text"> {{$producto->precio}}</h5>

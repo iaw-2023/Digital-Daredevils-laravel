@@ -35,9 +35,9 @@ class PedidosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DetallesPedido $detallesPedido)
+    public function show(Pedido $pedido)
     {
-        return view('pedidos/show')->with('detallesPedido',$detallesPedido);
+        return view('pedidos/show')->with('pedido',$pedido);
     }
 
     /**

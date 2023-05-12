@@ -3,17 +3,46 @@
 @section('content')
 <div class="container">
     <div class="card col-5 offset-3">
-        <h2 class="card-header">{{$pedido->cliente}}</h2>
+        <div class="card-header">
+            Pedido #{{ $pedido->id }}
+        </div>
         <div class="card-body">
-        <h2 class="card-header">{{$pedido->fecha}}</h2>
-            <h4 class="card-text text-center">
-                <img class="card-img-top img-fluid imagenesShow" src="{{$pedido->producto->imagen_ruta}}" alt="Imagen del producto" >
-            </h4>
-            <h2 class="card-header">{{$pedido->productos->cliente}}</h2>
-            <h5 class="card-text"> {{$pedido->precio}}</h5>
-            <h5 class="card-text"> {{$pedido->marca}}</h5>
-            <h5 class="card-text"> {{$pedido->categoria->nombre}}</h5>
-            <h5 href="/productos" class="btn btn-dark">Go Back</h5>
+            <div class="pedido-info">
+                <span class="pedido-label">Cliente:</span>
+                <span class="pedido-value">{{$pedido->cliente}}</span>
+            </div>
+            <div class="pedido-info">
+                <span class="pedido-label">Fecha:</span>
+                <span class="pedido-value">{{$pedido->fecha}}</span>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $totalPedido = 0;
+                    @endphp
+                    @foreach ($pedido->productos as $producto)
+                        <tr>
+                            <td>{{ $producto->modelo }}</td>
+                            <td>{{ $producto->pivot->cantidad }}</td>
+                            <td>{{ $producto->precio }}</td>
+                        </tr>
+                        @php
+                            $totalPedido += $producto->pivot->cantidad * $producto->precio;
+                        @endphp
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="pedido-info">
+                <span class="pedido-label">Total del pedido:</span>
+                <span class="pedido-value">${{$totalPedido}}</span>
+            </div>
         </div>
     </div>
 </div>
