@@ -36,4 +36,4 @@ Aclaraciones y decisiones de diseño:
     - Para los datos que populan los atributos de las entidades, en el Seeding, se utilizó la librería Faker que ya viene incorporada en PHP, aunque, en casos como el atributo 'talle' de Producto, se decidió crear un 'enumerado' de talles a mano para lograr un mejor entendimiento y legibilidad de las entidades en el conjunto 'Productos'.
 
 Entrega #2 (Proyecto Laravel)
- - Enlace a la documentación de la api: https://abclothing.vercel.com/api-documentation
+ - Enlace a la documentación de la api: https://digital-daredevils-laravel-digitaldaredevils.vercel.app/api-documentation
