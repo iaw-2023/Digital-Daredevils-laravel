@@ -28,8 +28,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('productos',ProductosController::class);
     Route::resource('categorias',CategoriasController::class);
-    Route::resource('pedidos',PedidosController::class)->except([
-        'create', 'store', 'update', 'destroy'
+    Route::resource('pedidos',PedidosController::class)->only([
+        'index', 'show'
     ]);
 });
 
