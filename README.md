@@ -34,3 +34,6 @@ Aclaraciones y decisiones de diseño:
     - Se crean pedidos con una misma cantidad de productos ya que el rand() emplea un único seed para la generación de cada entidad en el conjunto de entidades: detalles_pedidos. Se decide dejarlo así porque es solo con fines de seeding y a modo de ejemplo. También se definen las entidades del conjunto de entidades: detalles_pedidos con una cantidad fijada en '1', también para simplificar el seeding.
     - Para el seeding, se crea una cantidad fija de 5 categorías y 50 pedidos, donde cada pedido tiene hasta un máximo de 50 productos, y cada producto pertenece a una de estas categorías anteriormente mencionadas.
     - Para los datos que populan los atributos de las entidades, en el Seeding, se utilizó la librería Faker que ya viene incorporada en PHP, aunque, en casos como el atributo 'talle' de Producto, se decidió crear un 'enumerado' de talles a mano para lograr un mejor entendimiento y legibilidad de las entidades en el conjunto 'Productos'.
+
+Entrega #2 (Proyecto Laravel)
+ - Enlace a la documentación de la api: https://abclothing.vercel.com/api-documentation
