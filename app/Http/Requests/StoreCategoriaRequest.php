@@ -21,9 +21,9 @@ class StoreCategoriaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            CategoriasRequestRules::getValidationRules(), 
-            'nombre' => 'required|max:50|unique:categorias'
-        ];
+        $validationRules = CategoriasRequestRules::getValidationRules();
+        $validationRules['nombre'] = 'required|max:50|unique:categorias';
+
+        return $validationRules;
     }
 }
