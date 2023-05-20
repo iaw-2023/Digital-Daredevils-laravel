@@ -28,14 +28,16 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('productos',ProductosController::class);
     Route::resource('categorias',CategoriasController::class);
-    Route::resource('pedidos',PedidosController::class)->only([
+    Route::resource('pedidos', PedidosController::class)->only([
         'index', 'show'
+    ])->parameters([
+        'pedidos' => 'id'
     ]);
+    Route::pattern('id', '[0-9]+');
 });
 
 Route::get('/api-documentation', function () {
     return view('api-documentation');
 });
-
 
 require __DIR__.'/auth.php';
