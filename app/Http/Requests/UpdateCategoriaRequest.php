@@ -22,9 +22,8 @@ class UpdateCategoriaRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            CategoriasRequestRules::getValidationRules(), 
-            'nombre' => ['required',Rule::unique('categorias', 'nombre')->ignore($this->categoria->id)]
-        ];
+        $validationRules = CategoriasRequestRules::getValidationRules();
+        $validationRules['nombre'] = ['required',Rule::unique('categorias', 'nombre')->ignore($this->categoria->id)];
+        return $validationRules;
     }
 }
