@@ -6,7 +6,7 @@ info:
   version: 1.0.11
 servers:
 
-  - url: digital-daredevils-laravel-cp28gjs6d-digitaldaredevils.vercel.app/restApi/
+  - url: https://digital-daredevils-laravel-digitaldaredevils.vercel.app/restApi/
 tags:
   - name: productos
     description: This endpoint provides all the information about the store's products.
