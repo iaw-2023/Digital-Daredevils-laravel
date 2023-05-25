@@ -18,7 +18,12 @@ class ApiController extends Controller
     }
 
     public function producto($id){
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
         $producto = Producto::find($id);
+
         return $this->responseOrError($producto, 'Producto no encontrado');
     }
 
@@ -30,7 +35,12 @@ class ApiController extends Controller
 
     public function categoria($id)
     {
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+    
         $categoria = Categoria::find($id);
+        
         return $this->responseOrError($categoria, 'Categoria no encontrada');
     }
 
