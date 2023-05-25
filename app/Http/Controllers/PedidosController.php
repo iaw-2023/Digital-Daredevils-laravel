@@ -15,14 +15,18 @@ class PedidosController extends Controller
         return view('pedidos/index')->with('pedidos', $pedidos);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pedido $pedido)
+    public function show($id)
     {
-        if (!$pedido->exists) {
+        if (!is_numeric($id)) {
             abort(404);
         }
-        return view('pedidos/show')->with('pedido',$pedido);
+
+        $pedido = Pedido::find($id);
+
+        if (!$pedido) {
+            abort(404);
+        }
+
+        return view('pedidos/show')->with('pedido', $pedido);
     }
 }

@@ -37,19 +37,35 @@ class ProductosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Producto $producto)
+    public function show($id)
     {
-        return view('productos/show')->with('producto',$producto);
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
+        $producto = Producto::find($id);
+
+        if (!$producto) {
+            abort(404);
+        }
+
+        return view('productos.show')->with('producto', $producto);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Producto $producto)
+    public function edit($id)
     {
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
+        $producto = Producto::find($id);
+
+        if (!$producto) {
+            abort(404);
+        }
+
         return view('productos/edit')->with('producto',$producto);
     }
-
     /**
      * Update the specified resource in storage.
      */

@@ -36,18 +36,35 @@ class CategoriasController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified resource.
      */
-    public function show(Categoria $categoria)
+    public function show($id)
     {
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            abort(404);
+        }
+
         return view('categorias/show')->with('categoria',$categoria);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Categoria $categoria)
+    public function edit($id)
     {
+        if (!is_numeric($id)) {
+            abort(404);
+        }
+
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            abort(404);
+        }
+
         return view('categorias/edit')->with('categoria',$categoria);
     }
 
