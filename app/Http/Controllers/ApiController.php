@@ -30,6 +30,15 @@ class ApiController extends Controller
         }
     }
 
+    public function productosByQuery($query)
+    {
+        $productos = Producto::where('modelo', 'LIKE', '%' . $query . '%')
+            ->orWhere('marca', 'LIKE', '%' . $query . '%')
+            ->paginate(24);
+    
+        return $this->responseOrError($productos, 'Productos no encontrados');
+    }
+    
 
     public function producto($id){
         $this->validateId($id);

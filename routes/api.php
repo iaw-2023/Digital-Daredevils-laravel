@@ -24,4 +24,5 @@ Route::get('/categorias/{id}/productos',[ApiController::class,'productosByCatego
 Route::get('/categorias',[ApiController::class,'categorias']);
 Route::get('/productos/{id}',[ApiController::class,'producto']);
 Route::get('/productos',[ApiController::class,'productos']);
+Route::get('/productos/query/{query}',[ApiController::class,'productosByQuery']);
 Route::post('/pedidos',[ApiController::class,'storePedido']);

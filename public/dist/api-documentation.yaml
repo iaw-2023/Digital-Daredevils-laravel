@@ -69,6 +69,38 @@ paths:
           description: Producto no encontrado
         '500':
           description: Server error
+  /productos/query/{query}:
+    get:
+      tags:
+        - productos
+      summary: Gets products by query.
+      operationId: getProductosByQuery
+      parameters:
+        - name: query
+          in: path
+          description: Query string to filter products by modelo or marca
+          required: true
+          schema:
+            type: string
+          example: "shirt"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+        '404':
+          description: Productos no encontrados
+        '500':
+          description: Server error
   /categorias:
     get:
       tags:
