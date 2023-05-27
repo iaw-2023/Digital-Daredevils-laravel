@@ -13,14 +13,26 @@ class ApiController extends Controller
 
     public function productos()
     {
-        $productos = Producto::paginate(100);
+        $productos = Producto::paginate(24);
         return $this->responseOrError($productos, 'Productos no encontrados');
     }
 
-    public function producto($id){
-        if (!is_numeric($id)) {
-            abort(404);
+    public function productosByCategoria($id)
+    {
+        $this->validateId($id);
+        $categoria = Categoria::find($id);
+        if ($categoria){
+            $productos = Producto::where('categoria_id', $id)->paginate(24);
+            return $this->responseOrError($productos, 'Productos no encontrados para esa categoria');
         }
+        else{
+            return $this->responseOrError($categoria, 'Categoria no encontrada');
+        }
+    }
+
+
+    public function producto($id){
+        $this->validateId($id);
 
         $producto = Producto::find($id);
 
@@ -29,15 +41,13 @@ class ApiController extends Controller
 
     public function categorias()
     {
-        $categorias = Categoria::paginate(100);
+        $categorias = Categoria::paginate(24);
         return $this->responseOrError($categorias, 'Categorias no encontradas');
     }
 
     public function categoria($id)
     {
-        if (!is_numeric($id)) {
-            abort(404);
-        }
+        $this->validateId($id);
     
         $categoria = Categoria::find($id);
         
@@ -68,6 +78,12 @@ class ApiController extends Controller
             return response()->json($recoveredDataObject, 200);
         } else {
             return response()->json(['error' => $message], 404);
+        }
+    }
+
+    private function validateId($id){
+        if (!is_numeric($id)) {
+            abort(404);
         }
     }
 }

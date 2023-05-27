@@ -122,6 +122,40 @@ paths:
           description: Categoria no encontrada
         '500':
           description: Server error
+          
+  /categorias/{id}/productos:
+    get:
+      tags:
+        - categorias
+      summary: Gets products by category ID.
+      operationId: getProductosByCategoria
+      parameters:
+        - name: id
+          in: path
+          description: Category ID to filter products.
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 2
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+        '404':
+          description: Categoria no encontrada o productos no encontrados para esa categoría
+        '500':
+          description: Server error
   /pedidos:
     post:
       tags:
