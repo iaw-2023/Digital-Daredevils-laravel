@@ -13,7 +13,7 @@ class ProductosController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        $productos = Producto::paginate(24);
+        $productos = Producto::paginate(12);
         return view('productos/index')->with('productos', $productos);
     }
 
