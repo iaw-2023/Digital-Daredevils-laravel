@@ -13,7 +13,7 @@ class ApiController extends Controller
 
     public function productos()
     {
-        $productos = Producto::paginate(12);
+        $productos = Producto::paginate(6);
         return $this->responseOrError($productos, 'Productos no encontrados');
     }
 
