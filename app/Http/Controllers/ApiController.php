@@ -73,7 +73,8 @@ class ApiController extends Controller
 
     public function detallesPedido($pedido_id)
     {
-        $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)->get();
+        
+        $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)->join('productos', 'detalles_pedidos.producto_id', '=', 'productos.id')->get();
 
         return $this->responseOrError($detallesPedido, '');
     }

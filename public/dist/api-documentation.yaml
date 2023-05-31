@@ -308,6 +308,24 @@ components:
           format: date-time
           description: 'Last time this object was edited successfully'
           example: '2023-05-28T00:10:35.000000Z'
+        talle:
+          type: string
+          example: 'm'
+        precio:
+          type: string
+          example: '142.15'
+        imagen_ruta:
+          type: string
+          example: 'https://via.placeholder.com/640x480.png/009933?text=est'
+        modelo:
+          type: string
+          example: 'quia'
+        marca:
+          type: string
+          example: 'velit'
+        categoria_id:
+          type: integer
+          example: 1
     Categoria:
       type: object
       properties:
