@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
+use App\Models\DetallesPedido;
 use App\Models\Producto;
 use App\Models\Pedido;
 use App\Http\Requests\StorePedidoRequest;
@@ -63,6 +64,19 @@ class ApiController extends Controller
         return $this->responseOrError($categoria, 'Categoria no encontrada');
     }
 
+    public function pedidosUsuario($email)
+    {
+        $pedidos = Pedido::where('cliente', $email)->paginate(24);
+        
+        return $this->responseOrError($pedidos, 'Pedidos no encontrados para ese email');
+    }
+
+    public function detallesPedido($pedido_id)
+    {
+        $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)->get();
+
+        return $this->responseOrError($detallesPedido, '');
+    }
 
     public function storePedido(StorePedidoRequest $request)
     {

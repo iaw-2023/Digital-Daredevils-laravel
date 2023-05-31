@@ -3,9 +3,8 @@ info:
   title: AB Clothing Store - API Documentation
   description: |-
     API documentation for the AB Clothing Store. Here you will find all the information about the endpoints the project provides and what they may be used for. 
-  version: 1.0.11
+  version: 1.0.12
 servers:
-
   - url: https://digital-daredevils-laravel-digitaldaredevils.vercel.app/restApi/
 tags:
   - name: productos
@@ -219,8 +218,96 @@ paths:
                 $ref: '#/components/schemas/PedidoResponse'
         '500':
           description: No se pudo crear el pedido
+  /pedidos/{email}:
+    get:
+      tags:
+        - pedidos
+      summary: Gets a customer's pedidos.
+      parameters:
+        - name: email
+          in: path
+          description: Customer's email to retrieve the pedidos for.
+          required: true
+          schema:
+            type: string
+            example: juancito@gmail.com
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PedidoResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PedidoResponse'
+        '404':
+          description: No se encontraron pedidos para ese cliente o no se encontró el cliente
+        '500':
+          description: Server error
+  /detallesPedido/{pedido_id}:
+    get:
+      tags:
+        - pedidos
+      summary: Gets the details of a pedido.
+      parameters:
+        - name: pedido_id
+          in: path
+          description: Pedido ID to retrieve the details for.
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 67
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DetallesPedido'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DetallesPedido'
+        '404':
+          description: Pedido no encontrado
+        '500':
+          description: Server error
 components:
   schemas:
+    DetallesPedido:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 672
+        pedido_id:
+          type: integer
+          format: int64
+          example: 67
+        producto_id:
+          type: integer
+          format: int64
+          example: 2
+        cantidad:
+          type: integer
+          minimum: 1
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-28T00:10:35.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-28T00:10:35.000000Z'
     Categoria:
       type: object
       properties:
