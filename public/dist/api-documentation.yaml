@@ -1,0 +1,477 @@
+openapi: 3.0.3
+info:
+  title: AB Clothing Store - API Documentation
+  description: |-
+    API documentation for the AB Clothing Store. Here you will find all the information about the endpoints the project provides and what they may be used for. 
+  version: 1.0.12
+servers:
+  - url: https://digital-daredevils-laravel-digitaldaredevils.vercel.app/restApi/
+tags:
+  - name: productos
+    description: This endpoint provides all the information about the store's products.
+  - name: categorias
+    description: This endpoint provides all the information about the store's categories.
+  - name: pedidos
+    description: This endpoint provides all the information about the store's pedidos.
+
+paths:
+  /productos:
+    get:
+      tags:
+        - productos
+      summary: Gets all the available products the clothing store has.
+      operationId: getProductos
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+        '404':
+          description: Productos no encontrados
+        '500':
+          description: Server error
+  /productos/{idProducto}:
+    get:
+      tags:
+        - productos
+      summary: Gets information about a single product.
+      parameters:
+        - name: idProducto
+          in: path
+          description: identificador del producto a obtener
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 2
+      operationId: getProductoById
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Producto'
+        '404':
+          description: Producto no encontrado
+        '500':
+          description: Server error
+  /productos/query/{query}:
+    get:
+      tags:
+        - productos
+      summary: Gets products by query.
+      operationId: getProductosByQuery
+      parameters:
+        - name: query
+          in: path
+          description: Query string to filter products by modelo or marca
+          required: true
+          schema:
+            type: string
+          example: "shirt"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+        '404':
+          description: Productos no encontrados
+        '500':
+          description: Server error
+  /categorias:
+    get:
+      tags:
+        - categorias
+      summary: Gets all the available categories the clothing store has.
+      operationId: getCategorias
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'   
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Categoria'
+        '404':
+          description: Categorias no encontradas
+        '500':
+          description: Server error
+  /categorias/{idCategoria}:
+    get:
+      tags:
+        - categorias
+      summary: Gets information about a single category.
+      parameters:
+        - name: idCategoria
+          in: path
+          description: identificador de la categoría a obtener
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 2
+      operationId: getCategoriaById
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categoria'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Categoria'
+        '404':
+          description: Categoria no encontrada
+        '500':
+          description: Server error
+          
+  /categorias/{id}/productos:
+    get:
+      tags:
+        - categorias
+      summary: Gets products by category ID.
+      operationId: getProductosByCategoria
+      parameters:
+        - name: id
+          in: path
+          description: Category ID to filter products.
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 2
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Producto'
+        '404':
+          description: Categoria no encontrada o productos no encontrados para esa categoría
+        '500':
+          description: Server error
+  /pedidos:
+    post:
+      tags:
+        - pedidos
+      summary: Adds a new pedido to the store
+      operationId: storePedido
+      requestBody:
+        description: Create a new pedido in the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PedidoRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PedidoRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PedidoRequest'
+      responses:
+        '201':
+          description: Pedido creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PedidoResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PedidoResponse'
+        '500':
+          description: No se pudo crear el pedido
+  /pedidos/{email}:
+    get:
+      tags:
+        - pedidos
+      summary: Gets a customer's pedidos.
+      parameters:
+        - name: email
+          in: path
+          description: Customer's email to retrieve the pedidos for.
+          required: true
+          schema:
+            type: string
+            example: juancito@gmail.com
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PedidoResponse'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PedidoResponse'
+        '404':
+          description: No se encontraron pedidos para ese cliente o no se encontró el cliente
+        '500':
+          description: Server error
+  /detallesPedido/{pedido_id}:
+    get:
+      tags:
+        - pedidos
+      summary: Gets the details of a pedido.
+      parameters:
+        - name: pedido_id
+          in: path
+          description: Pedido ID to retrieve the details for.
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 67
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DetallesPedido'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DetallesPedido'
+        '404':
+          description: Pedido no encontrado
+        '500':
+          description: Server error
+components:
+  schemas:
+    DetallesPedido:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 672
+        pedido_id:
+          type: integer
+          format: int64
+          example: 67
+        producto_id:
+          type: integer
+          format: int64
+          example: 2
+        cantidad:
+          type: integer
+          minimum: 1
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-28T00:10:35.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-28T00:10:35.000000Z'
+        talle:
+          type: string
+          example: 'm'
+        precio:
+          type: string
+          example: '142.15'
+        imagen_ruta:
+          type: string
+          example: 'https://via.placeholder.com/640x480.png/009933?text=est'
+        modelo:
+          type: string
+          example: 'quia'
+        marca:
+          type: string
+          example: 'velit'
+        categoria_id:
+          type: integer
+          example: 1
+    Categoria:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        imagen_ruta:
+          type: string
+          example: 'https:\/\/via.placeholder.com\/640x480.png\/001122?text=aperiam'
+        nombre:
+          type: string
+          example: 'Shirts'
+        descripcion:
+          type: string
+          example: 'Fall-Winter fashioned shirts that let you be your greatest self!'
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-04T17:40:45.000000Z'
+      xml:
+        name: categoria
+    Producto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        talle:
+          type: string
+          example: 'xs'
+          description: 'talle del producto en la tienda'
+          enum:
+            - xs
+            - s
+            - m
+            - l
+            - xl
+        precio:
+          type: number
+          format: double
+          example: 1050.99
+        imagen_ruta:
+          type: string
+          example: 'https:\/\/via.placeholder.com\/640x480.png\/001122?text=aperiam'
+        modelo:
+          type: string
+          example: 'Juan Shirt'
+        marca:
+          type: string
+          example: 'Juan Brand'
+        categoria_id:
+          type: integer
+          format: int64
+          description: 'The Categoria object that this Producto object belongs to'
+          example: 1
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-04T17:40:45.000000Z'
+      xml:
+        name: producto
+    Pedido:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        cliente:
+          type: string
+          example: 'juancito@gmail.com'
+          description: 'Email del cliente asociado al pedido'
+        fecha:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        created_at:
+          type: string
+          format: date-time
+          description: 'The time this object was created'
+          example: '2023-05-04T17:40:45.000000Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: 'Last time this object was edited successfully'
+          example: '2023-05-04T17:40:45.000000Z'
+      xml:
+        name: pedido
+    PedidoRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        cliente:
+          type: string
+          example: juancito@gmail.com
+          description: Email del cliente asociado al pedido
+        fecha:
+          type: string
+          format: date-time
+          description: Fecha en que se realizó el pedido
+          example: '2023-05-04T17:40:45.000000Z'
+        productos:
+          type: array
+          items:
+            $ref: '#/components/schemas/PedidoProducto'
+      required:
+        - cliente
+        - productos
+    PedidoProducto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        cantidad:
+          type: integer
+          minimum: 1
+          example: 2
+      required:
+        - id
+        - cantidad
+    PedidoResponse:
+      allOf:
+        - $ref: '#/components/schemas/Pedido'
+        - type: object
+          properties:
+            productos:
+              type: array
+              items:
+                $ref: '#/components/schemas/PedidoProducto'

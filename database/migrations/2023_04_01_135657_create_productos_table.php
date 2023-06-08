@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('talle');
-            $table->decimal('precio', 9, 2);
-            $table->string('imagen');
+            $table->decimal('precio', 7, 2);
+            $table->string('imagen_ruta')->nullable();
             $table->string('modelo');
             $table->string('marca');
             $table->foreignId('categoria_id')->constrained()
                   ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                  ->onDelete('cascade');
             $table->timestamps();
         });
     }
