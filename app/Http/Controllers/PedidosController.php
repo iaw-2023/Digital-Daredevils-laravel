@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 
 class PedidosController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:pedidos.index')->only('index');
+        $this->middleware('can:pedidos.view')->only('show');
+
+    }
     /**
      * Display a listing of the resource.
      */

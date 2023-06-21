@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 
 class CategoriasController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:categorias.index')->only('index');
+        $this->middleware('can:categorias.edit')->only('edit','update');
+        $this->middleware('can:categorias.create')->only('create','store');
+        $this->middleware('can:categorias.view')->only('show');
+        $this->middleware('can:categorias.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      */

@@ -6,9 +6,9 @@
   <h1 class="font-semibold text-xl text-white dark:text-gray-200 leading-tight text-center">
           <strong>{{ __('Categorías') }}</strong>
   </h1>
-
+  @can('categorias.create')
   <a href="/categorias/create" class="btn btn-dark btn-lg mb-3">Create</a>
-
+  @endcan
   <table class="table text-white"">
     <thead>
       <tr>
@@ -28,9 +28,15 @@
           <form action="/categorias/{{$categoria->id}}" method="POST">
               @method('DELETE')
               @csrf 
+              @can('categorias.view')
               <a href="/categorias/{{$categoria->id}}" class="btn btn-dark">View</a>
+              @endcan
+              @can('categorias.edit')
               <a href="/categorias/{{$categoria->id}}/edit" class="btn btn-dark">Edit</a>
+              @endcan
+              @can('categorias.delete')
               <button type="submit" class="btn botonColor">Delete</button>
+              @endcan
           </form>
         </td>
       </tr>

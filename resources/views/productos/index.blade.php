@@ -7,8 +7,10 @@
   <h1 class="font-semibold text-xl text-white dark:text-gray-200 leading-tight text-center">
     <strong>{{ __('Productos') }}  </strong>
   </h1>
-  
+ @can('productos.create')
   <a href="/productos/create" class="btn btn-dark btn-lg mb-3">Create</a>
+ @endcan
+ 
 
   <table class="table text-white">
     <thead >
@@ -35,9 +37,15 @@
           <form action="/productos/{{$producto->id}}" method="POST">
               @method('DELETE')
               @csrf 
+              @can('productos.view')
               <a href="/productos/{{$producto->id}}" class="btn btn-dark">View</a>
+              @endcan
+              @can('productos.edit')
               <a href="/productos/{{$producto->id}}/edit" class="btn btn-dark">Edit</a>
+              @endcan
+              @can('productos.delete')
               <button type="submit" class="btn botonColor">Delete</button>
+              @endcan
           </form>
         </td>
       </tr>
