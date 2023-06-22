@@ -21,5 +21,10 @@ class AdminUserTableSeeder extends Seeder
             'password' =>  Hash::make('empleado123')
         ])->assignRole('Empleado');
 
+        User::create([
+            'name' => 'Lector',
+            'email' => 'Lector@iaw.com',
+            'password' =>  Hash::make('Lector123')
+        ])->assignRole('Lector');
     }
 }
