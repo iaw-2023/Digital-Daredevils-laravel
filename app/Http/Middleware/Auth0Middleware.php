@@ -56,8 +56,7 @@ class Auth0Middleware
                 'data' => $token->toArray()
             ], JSON_PRETTY_PRINT);
 
-            $response->setData($responseData);
-            return $response;
+            return $next($request);
         }
 
         // Issue a HTTP 401 Unauthorized status:
