@@ -64,9 +64,10 @@ class ApiController extends Controller
         return $this->responseOrError($categoria, 'Categoria no encontrada');
     }
 
-    public function pedidosUsuario($email)
+    public function pedidosUsuario($request)
     {
-        $pedidos = Pedido::where('cliente', $email)->paginate(24);
+        $userEmail = $request->input('email');
+        $pedidos = Pedido::where('cliente', $userEmail)->paginate(24);
         
         return $this->responseOrError($pedidos, 'Pedidos no encontrados para ese email');
     }
@@ -79,11 +80,13 @@ class ApiController extends Controller
         return $this->responseOrError($detallesPedido, '');
     }
 
-    public function storePedido(StorePedidoRequest $request)
+    public function storePedido(StorePedidoRequest $request, $userEmail = null)
     {
         try {
-            $pedido = Pedido::create($request->validated());
-
+            $pedidoData = $request->validated();
+            $pedidoData['cliente'] = $userEmail;
+    
+            $pedido = Pedido::create($pedidoData);
             foreach ($request->input('productos') as $producto) {
                 $pedido->productos()->attach($producto['id'], ['cantidad' => $producto['cantidad']]);
             }

@@ -39,21 +39,18 @@ class Auth0Middleware
 
             // Attempt to decode the token:
             try {
-                $token = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN);
+                $decodedToken = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN);
                 define('ENDPOINT_AUTHORIZED', true);
+
+                $userEmail = $decodedToken['email'];
+                $request->merge(['email' => $email]);
+
+                return $next($request);
             } catch (\Auth0\SDK\Exception\InvalidTokenException $exception) {
-                // The token wasn't valid. Let's display the error message from the Auth0 SDK.
-                // We'd probably want to show a custom error here for a real world application.
                 die($exception->getMessage());
             }
         }
-        
-        // Is the request authorized?
-        if (defined('ENDPOINT_AUTHORIZED')) {
-            return $next($request);
-        }
 
-        // Issue a HTTP 401 Unauthorized status:
         return new JsonResponse([
             'authorized' => false,
             'error' => [
