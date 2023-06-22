@@ -44,7 +44,7 @@ class Auth0Middleware
                 $userEmail = $decodedToken['https://example.com/email'];
                 $request->merge(['email' => $userEmail]);
 
-                return $decodedToken;
+                return $next($request);
             } catch (\Auth0\SDK\Exception\InvalidTokenException $exception) {
                 die($exception->getMessage());
             }
