@@ -85,8 +85,10 @@ class ApiController extends Controller
     {
         try {
             $pedidoData = $request->validated();
+            
             $userEmail = $request->input('email');
             $pedidoData['cliente'] = $userEmail;
+            
             $pedido = Pedido::create($pedidoData);
             foreach ($request->input('productos') as $producto) {
                 $pedido->productos()->attach($producto['id'], ['cantidad' => $producto['cantidad']]);
