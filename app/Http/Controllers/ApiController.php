@@ -8,6 +8,7 @@ use App\Models\DetallesPedido;
 use App\Models\Producto;
 use App\Models\Pedido;
 use App\Http\Requests\StorePedidoRequest;
+use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
@@ -64,7 +65,7 @@ class ApiController extends Controller
         return $this->responseOrError($categoria, 'Categoria no encontrada');
     }
 
-    public function pedidosUsuario($request)
+    public function pedidosUsuario(Request $request)
     {
         $userEmail = $request->input('email');
         $pedidos = Pedido::where('cliente', $userEmail)->paginate(24);
