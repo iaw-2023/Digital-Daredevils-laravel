@@ -80,10 +80,11 @@ class ApiController extends Controller
         return $this->responseOrError($detallesPedido, '');
     }
 
-    public function storePedido(StorePedidoRequest $request, $userEmail = null)
+    public function storePedido(StorePedidoRequest $request)
     {
         try {
             $pedidoData = $request->validated();
+            $userEmail = $request->input('email');
             $pedidoData['cliente'] = $userEmail;
     
             $pedido = Pedido::create($pedidoData);

@@ -27,8 +27,7 @@ Route::get('/productos',[ApiController::class,'productos']);
 Route::get('/productos/query/{query}',[ApiController::class,'productosByQuery']);
 
 Route::middleware('auth0')->group(function () {
-    Route::get('/pedidos/{id}', [ApiController::class, 'pedidosUsuario']);
+    Route::get('/pedidos', fn () => app([ApiController::class, 'pedidosUsuario', 'userEmail' => request()->input('email')]));
     Route::get('/detallesPedido/{id}', [ApiController::class, 'detallesPedido']);
-    Route::post('/pedidos',[ApiController::class,'storePedido']);
     Route::post('/pedidos', fn () => app([ApiController::class, 'storePedido', 'userEmail' => request()->input('email')]));
 });
