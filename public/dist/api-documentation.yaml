@@ -5,7 +5,7 @@ info:
     API documentation for the AB Clothing Store. Here you will find all the information about the endpoints the project provides and what they may be used for. 
   version: 1.0.12
 servers:
-  - url: https://digital-daredevils-laravel-digitaldaredevils.vercel.app/restApi/
+  - url: https://digital-daredevils-laravel-albanomazzino-digitaldaredevils.vercel.app/restApi/
 tags:
   - name: productos
     description: This endpoint provides all the information about the store's products.
