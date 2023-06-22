@@ -50,12 +50,6 @@ class Auth0Middleware
         
         // Is the request authorized?
         if (defined('ENDPOINT_AUTHORIZED')) {
-            // Respond with a JSON response:
-            echo json_encode([
-                'authorized' => true,
-                'data' => $token->toArray()
-            ], JSON_PRETTY_PRINT);
-
             return $next($request);
         }
 
