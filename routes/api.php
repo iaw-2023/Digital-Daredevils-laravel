@@ -29,5 +29,5 @@ Route::get('/productos/query/{query}',[ApiController::class,'productosByQuery'])
 Route::middleware('auth0')->group(function () {
     Route::get('/pedidos', [ApiController::class, 'pedidosUsuario']);
     Route::get('/detallesPedido/{id}', [ApiController::class, 'detallesPedido']);
-    Route::post('/pedidosPost', [ApiController::class, 'storePedido']);
+    Route::post('/pedidos', [ApiController::class, 'storePedido']);
 });
