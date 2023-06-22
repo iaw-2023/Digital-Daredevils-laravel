@@ -3,7 +3,6 @@ namespace App\Http\Middleware;
 
 use Auth0\SDK\Auth0;
 use Closure; 
-use Dotenv\Dotenv;
 use Illuminate\Http\JsonResponse;
 
 class Auth0Middleware
