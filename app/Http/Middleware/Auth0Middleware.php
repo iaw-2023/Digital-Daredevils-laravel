@@ -2,24 +2,28 @@
 namespace App\Http\Middleware;
 
 use Auth0\SDK\Auth0;
-use Closure; use Dotenv\Dotenv;
+use Closure; 
+use Dotenv\Dotenv;
+use Illuminate\Http\JsonResponse;
 
 class Auth0Middleware
 {
     public function handle($request, Closure $next)
     {
         // Import the Composer Autoloader to make the SDK classes accessible:
-        require 'vendor/autoload.php';
+        require __DIR__ . '/../../../vendor/autoload.php';
+
 
         // Load our environment variables from the .env file:
-        (Dotenv::createImmutable(__DIR__))->load();
+        (Dotenv::createImmutable(__DIR__ . '/../../../'))->load();
 
         // Now instantiate the Auth0 class with our configuration:
         $auth0 = new Auth0([
             'domain' => $_ENV['AUTH0_DOMAIN'],
             'clientId' => $_ENV['AUTH0_CLIENT_ID'],
             'clientSecret' => $_ENV['AUTH0_CLIENT_SECRET'],
-            'audience' => $_ENV['AUTH0_AUDIENCE']
+            'audience' => [$_ENV['AUTH0_AUDIENCE']],
+            'cookieSecret' => $_ENV['AUTH0_SECRET']
         ]);
 
         // Caching
@@ -57,28 +61,16 @@ class Auth0Middleware
                 'data' => $token->toArray()
             ], JSON_PRETTY_PRINT);
 
-            exit;
+            $response->setData($responseData);
+            return $response;
         }
 
         // Issue a HTTP 401 Unauthorized status:
-        http_response_code(401);
-
-        // Respond with a JSON response:
-        echo json_encode([
+        return new JsonResponse([
             'authorized' => false,
             'error' => [
                 'message' => 'You are NOT authorized to be here!'
             ]
-        ], JSON_PRETTY_PRINT);
-
-        // Perform any actions using the $auth0 object
-        // For example, you can authenticate a user:
-        $auth0->login();
-        // Or retrieve user information:
-        $user = $auth0->getUser();
-
-        // Continue with your desired logic
-
-        return $next($request);
+        ], 401);
     }
 }
