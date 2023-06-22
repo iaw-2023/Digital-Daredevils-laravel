@@ -41,8 +41,7 @@ class Auth0Middleware
             try {
                 $decodedToken = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN)->toArray();
                 define('ENDPOINT_AUTHORIZED', true);
-                error_log(print_r($decodedToken, true));
-                $userEmail = $decodedToken['email'];
+                $userEmail = $decodedToken['https://example.com/email'];
                 $request->merge(['email' => $email]);
 
                 return $next($request);
