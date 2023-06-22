@@ -42,7 +42,7 @@ class Auth0Middleware
                 $decodedToken = $auth0->decode($jwt, null, null, null, null, null, null, \Auth0\SDK\Token::TYPE_TOKEN)->toArray();
                 define('ENDPOINT_AUTHORIZED', true);
                 $userEmail = $decodedToken['https://example.com/email'];
-                $request->merge(['email' => $email]);
+                $request->merge(['email' => $userEmail]);
 
                 return $next($request);
             } catch (\Auth0\SDK\Exception\InvalidTokenException $exception) {
