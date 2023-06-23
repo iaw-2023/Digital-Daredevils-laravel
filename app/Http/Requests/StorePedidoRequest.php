@@ -22,7 +22,7 @@ class StorePedidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cliente' => 'required|email',
+            'email' => 'required|email',
             'fecha' => 'required|date'
         ];
     }

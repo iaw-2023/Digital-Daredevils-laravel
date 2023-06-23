@@ -84,12 +84,12 @@ class ApiController extends Controller
     public function storePedido(StorePedidoRequest $request)
     {
         try {
-            $pedidoData = $request;
+            $pedidoData = $request->validated();
+            
             $userEmail = $request->input('email');
             $pedidoData['cliente'] = $userEmail;
-            $pedidoDataValidated = $pedidoData->validated();
 
-            $pedido = Pedido::create($pedidoDataValidated);
+            $pedido = Pedido::create($pedidoData);
             foreach ($request->input('productos') as $producto) {
                 $pedido->productos()->attach($producto['id'], ['cantidad' => $producto['cantidad']]);
             }
