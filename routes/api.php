@@ -30,4 +30,5 @@ Route::middleware('auth0')->group(function () {
     Route::get('/pedidos', [ApiController::class, 'pedidosUsuario']);
     Route::get('/detallesPedido/{id}', [ApiController::class, 'detallesPedido']);
     Route::post('/pedidos', [ApiController::class, 'storePedido']);
+    Route::post('/procesarPago', [ApiController::class, 'procesarPagoMercadoPago']);
 });

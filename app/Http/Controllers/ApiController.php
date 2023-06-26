@@ -9,9 +9,38 @@ use App\Models\Producto;
 use App\Models\Pedido;
 use App\Http\Requests\StorePedidoRequest;
 use Illuminate\Http\Request;
+use MercadoPago\SDK;
+use MercadoPago\Payment;
+use MercadoPago\Payer;
 
 class ApiController extends Controller
 {
+    public function procesarPagoMercadoPago(Request $request){
+        require_once __DIR__ . '/../../../vendor/autoload.php';
+        SDK::setAccessToken($_ENV['MERCADOPAGO_ACCESS_TOKEN']);
+        $contents = $request->input();
+        
+        $payment = new Payment();
+        $payment->transaction_amount = $contents['transaction_amount'];
+        $payment->token = $contents['token'];
+        $payment->installments = $contents['installments'];
+        $payment->payment_method_id = $contents['payment_method_id'];
+        $payment->issuer_id = $contents['issuer_id'];
+        $payer = new Payer();
+        $payer->email = $contents['payer']['email'];
+        $payer->identification = array(
+            "type" => $contents['payer']['identification']['type'],
+            "number" => $contents['payer']['identification']['number']
+        );
+        $payment->payer = $payer;
+        $payment->save();
+        $response = array(
+            'status' => $payment->status,
+            'status_detail' => $payment->status_detail,
+            'id' => $payment->id
+        );
+        return json_encode($response);
+    }
 
     public function productos()
     {
@@ -81,6 +110,8 @@ class ApiController extends Controller
         return $this->responseOrError($detallesPedido, '');
     }
 
+
+
     public function storePedido(StorePedidoRequest $request)
     {
         try {
@@ -90,6 +121,7 @@ class ApiController extends Controller
             $pedidoData['cliente'] = $userEmail;
 
             $pedido = Pedido::create($pedidoData);
+            
             foreach ($request->input('productos') as $producto) {
                 $pedido->productos()->attach($producto['id'], ['cantidad' => $producto['cantidad']]);
             }
