@@ -16,7 +16,7 @@ use MercadoPago\Payer;
 class ApiController extends Controller
 {
     public function procesarPagoMercadoPago(Request $request){
-        require __DIR__ . '/../../../vendor/autoload.php';
+        require_once __DIR__ . '/../../../vendor/autoload.php';
         SDK::setAccessToken($_ENV['MERCADOPAGO_ACCESS_TOKEN']);
         $contents = $request->input();
         
