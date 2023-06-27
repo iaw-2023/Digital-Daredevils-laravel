@@ -6,7 +6,7 @@
     <h5 class="card-header">Nueva categoría</h5>
     <div class="card-body">
     @include('messages')
-        <form action="/categorias" method="POST">
+        <form action="/categorias" method="POST" enctype="multipart/form-data">
             @csrf
             @include('/categorias/form-categoria')
         </form>

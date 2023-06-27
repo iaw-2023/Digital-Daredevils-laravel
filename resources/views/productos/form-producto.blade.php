@@ -18,7 +18,7 @@
 
 <div class="form-group mb-3">
     <label  class="form-label">Imagen</label>
-    <input type="text" name="imagen_ruta" class="form-control @error('imagen_ruta') is-invalid @enderror bg-white" value="{{isset($producto) ? $producto->imagen_ruta: old('imagen_ruta')}}">
+    <input type="file" name="imagen_ruta" class="form-control @error('imagen_ruta') is-invalid @enderror bg-white" value="{{isset($producto) ? $producto->imagen_ruta: old('imagen_ruta')}}">
     @error('imagen_ruta')
         <span class="tex-danger">
         <strong>{{$message}}</strong>

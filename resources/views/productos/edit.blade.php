@@ -6,7 +6,7 @@
     <h5 class="card-header">Editar producto</h5>
     <div class="card-body">
     @include('messages')
-        <form action="/productos/{{$producto->id}}" method="POST">
+        <form action="/productos/{{$producto->id}}" method="POST"enctype="multipart/form-data">
             @csrf
             @method('PUT')
             @include('/productos/form-producto')

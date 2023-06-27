@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('talle');
             $table->decimal('precio', 7, 2);
             $table->string('imagen_ruta')->nullable();
+            $table->string('public_id')->nullable();
             $table->string('modelo');
             $table->string('marca');
             $table->foreignId('categoria_id')->constrained()

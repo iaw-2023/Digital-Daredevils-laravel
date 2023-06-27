@@ -6,7 +6,7 @@
     <h5 class="card-header">Edit Categoria</h5>
     <div class="card-body">
     @include('messages')
-        <form action="/categorias/{{$categoria->id}}" method="POST">
+        <form action="/categorias/{{$categoria->id}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             @include('/categorias/form-categoria')
