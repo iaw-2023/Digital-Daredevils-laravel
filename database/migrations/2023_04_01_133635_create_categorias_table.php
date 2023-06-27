@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('imagen_ruta')->nullable();
+            $table->string('public_id')->nullable();
             $table->string('nombre')->unique();
             $table->string('descripcion');
             $table->timestamps();

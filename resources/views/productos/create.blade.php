@@ -6,7 +6,7 @@
     <h5 class="card-header">Nuevo producto</h5>
     <div class="card-body">
     @include('messages')
-        <form action="/productos" method="POST">
+        <form action="/productos" method="POST"enctype="multipart/form-data">
             @csrf
             @include('/productos/form-producto')
         </form>

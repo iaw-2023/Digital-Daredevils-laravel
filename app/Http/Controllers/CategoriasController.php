@@ -6,6 +6,8 @@ use App\Models\Categoria;
 use App\Http\Requests\UpdateCategoriaRequest;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Controllers\Controller;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use SplFileInfo;
 
 class CategoriasController extends Controller
 {
@@ -38,8 +40,25 @@ class CategoriasController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        Categoria::create($request->validated());
-        return back()->with('success','Categoria creada con éxito');
+       
+       $requestData = $request->validated();
+       if(isset($requestData['imagen_ruta'])){
+        $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
+        $realPath = $fileInfo->getRealPath();
+        $cloudinaryResponse=cloudinary()->upload($realPath,['folder'=>'Categorias']);
+        $imageUrl = $cloudinaryResponse->getSecurePath();
+        $imagePublicId = $cloudinaryResponse->getPublicId();
+       }
+
+       Categoria::create([
+        'imagen_ruta'=>$imageUrl,
+        'public_id'=>$imagePublicId,
+        'nombre'=>$requestData['nombre'],
+        'descripcion'=>$requestData['descripcion'],
+       ]);
+       
+      
+       return back()->with('success','Categoria creada con éxito');
     }
 
     /**
@@ -80,7 +99,25 @@ class CategoriasController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        $categoria->update($request->validated());
+        $requestData = $request->validated();
+        $imageUrl = $categoria['imagen_ruta'];
+        $imagePublicId = $categoria['public_id'];
+
+        if(isset($requestData['imagen_ruta'])){
+            Cloudinary::destroy($imagePublicId);
+            $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
+            $realPath = $fileInfo->getRealPath();
+            $cloudinaryResponse=cloudinary()->upload($realPath,['folder'=>'Categorias']);
+            $imageUrl = $cloudinaryResponse->getSecurePath();
+            $imagePublicId = $cloudinaryResponse->getPublicId();
+           }
+        $categoria->update([
+            'imagen_ruta'=>$imageUrl,
+            'public_id'=>$imagePublicId,
+            'nombre'=>$requestData['nombre'],
+            'descripcion'=>$requestData['descripcion'],
+        ]);
+    
         return back()->with('success','Categoría modificada con éxito');
     }
 
@@ -89,6 +126,8 @@ class CategoriasController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
+        $imagePublicId = $categoria['public_id'];
+        Cloudinary::destroy($imagePublicId);
         $categoria->delete();
         return back()->with('success','Categoría removida con éxito');
     }

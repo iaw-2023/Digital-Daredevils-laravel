@@ -6,6 +6,8 @@ use App\Models\Producto;
 use App\Http\Requests\StoreProductoRequest;
 use App\Http\Requests\UpdateProductoRequest;
 use App\Http\Controllers\Controller;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use SplFileInfo;
 
 class ProductosController extends Controller
 {
@@ -37,7 +39,25 @@ class ProductosController extends Controller
      */
     public function store(StoreProductoRequest $request)
     {
-        Producto::create($request->validated());
+        $requestData = $request->validated();
+        if(isset($requestData['imagen_ruta'])){
+            $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
+            $realPath = $fileInfo->getRealPath();
+            $cloudinaryResponse=cloudinary()->upload($realPath,['folder'=>'Productos']);
+            $imageUrl = $cloudinaryResponse->getSecurePath();
+            $imagePublicId = $cloudinaryResponse->getPublicId();
+        }
+        
+        Producto::create([
+         'talle'=>$requestData['talle'],
+         'precio'=>$requestData['precio'],
+         'imagen_ruta'=>$imageUrl,
+         'public_id'=>$imagePublicId,
+         'modelo'=>$requestData['modelo'],
+         'marca'=>$requestData['marca'],
+         'categoria_id'=>$requestData['categoria_id'],
+         
+        ]);
         return back()->with('success','Producto creado con éxito');
     }
 
@@ -78,7 +98,29 @@ class ProductosController extends Controller
      */
     public function update(UpdateProductoRequest $request, Producto $producto)
     {
-        $producto->update($request->validated());
+        $requestData = $request->validated();
+        $imageUrl = $producto['imagen_ruta'];
+        $imagePublicId = $producto['public_id'];
+
+        if(isset($requestData['imagen_ruta'])){
+            Cloudinary::destroy($imagePublicId);
+            $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
+            $realPath = $fileInfo->getRealPath();
+            $cloudinaryResponse=cloudinary()->upload($realPath,['folder'=>'Productos']);
+            $imageUrl = $cloudinaryResponse->getSecurePath();
+            $imagePublicId = $cloudinaryResponse->getPublicId();
+           }
+        
+        $producto->update([
+            'imagen_ruta'=>$imageUrl,
+            'public_id'=>$imagePublicId,
+            'talle'=>$requestData['talle'],
+            'precio'=>$requestData['precio'],
+            'modell'=>$requestData['modelo'],
+            'marca'=>$requestData['marca'],
+            'categoria_id'=>$requestData['categoria_id'],
+         
+        ]);
         return back()->with('success','Producto modificado con éxito');
     }
 
@@ -87,6 +129,8 @@ class ProductosController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $imagePublicId = $producto['public_id'];
+        Cloudinary::destroy($imagePublicId);
         $producto->delete();
         return back()->with('success','Producto removido con éxito');
     }
