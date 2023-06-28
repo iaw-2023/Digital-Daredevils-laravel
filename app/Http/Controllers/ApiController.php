@@ -102,12 +102,28 @@ class ApiController extends Controller
         return $this->responseOrError($pedidos, 'Pedidos no encontrados para ese email');
     }
 
-    public function detallesPedido($pedido_id)
+    public function detallesPedido(Request $request, $pedido_id)
     {
-        
-        $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)->join('productos', 'detalles_pedidos.producto_id', '=', 'productos.id')->get();
+        $validatedRequestData = $request->validated();
 
-        return $this->responseOrError($detallesPedido, '');
+        $userEmail = $validatedRequestData->input('cliente');
+
+        $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)
+        ->join('productos', 'detalles_pedidos.producto_id', '=', 'productos.id')
+        ->join('pedidos', 'detalles_pedidos.producto_id', '=', 'pedidos.pedido_id')
+        ->get();
+
+        if ($detallesPedido){
+            if ($detallesPedido[0]['cliente'] == $userEmail){
+                return response()->json($detallesPedido, 200);
+            }
+            else {
+                return response()->json(['error' => 'Forbidden access.'], 401);
+            }
+        }
+        else {
+            return response()->json(['error' => 'No se encontraron detalles de pedido.'], 404);
+        }
     }
 
 
@@ -115,12 +131,12 @@ class ApiController extends Controller
     public function storePedido(StorePedidoRequest $request)
     {
         try {
-            $pedidoData = $request->validated();
+            $validatedRequestData = $request->validated();
             
-            $userEmail = $request->input('email');
-            $pedidoData['cliente'] = $userEmail;
+            $userEmail = $request->input('cliente');
+            $validatedRequestData['cliente'] = $userEmail;
 
-            $pedido = Pedido::create($pedidoData);
+            $pedido = Pedido::create($validatedRequestData);
             
             foreach ($request->input('productos') as $producto) {
                 $pedido->productos()->attach($producto['id'], ['cantidad' => $producto['cantidad']]);

@@ -22,7 +22,7 @@ class StorePedidoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'cliente' => 'required|email',
             'fecha' => 'required|date',
             'mercadopagoPaymentId' => 'required|numeric',
         ];
