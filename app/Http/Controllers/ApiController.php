@@ -96,7 +96,10 @@ class ApiController extends Controller
 
     public function pedidosUsuario(Request $request)
     {
-        $userEmail = $request->input('email');
+        $validatedRequestData = $request->validated();
+
+        $userEmail = $validatedRequestData['cliente'];
+
         $pedidos = Pedido::where('cliente', $userEmail)->paginate(24);
         
         return $this->responseOrError($pedidos, 'Pedidos no encontrados para ese email');
@@ -106,7 +109,7 @@ class ApiController extends Controller
     {
         $validatedRequestData = $request->validated();
 
-        $userEmail = $validatedRequestData->input('cliente');
+        $userEmail = $validatedRequestData['cliente'];
 
         $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)
         ->join('productos', 'detalles_pedidos.producto_id', '=', 'productos.id')
@@ -132,9 +135,6 @@ class ApiController extends Controller
     {
         try {
             $validatedRequestData = $request->validated();
-            
-            $userEmail = $request->input('cliente');
-            $validatedRequestData['cliente'] = $userEmail;
 
             $pedido = Pedido::create($validatedRequestData);
             
