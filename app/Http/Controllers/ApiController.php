@@ -97,8 +97,8 @@ class ApiController extends Controller
     public function pedidosUsuario(Request $request)
     {
         $validatedRequestData = $request->validated();
-
-        $userEmail = $request['cliente'];
+        var_dump($validatedRequestData);
+        $userEmail = $validatedRequestData['cliente'];
 
         $pedidos = Pedido::where('cliente', $userEmail)->paginate(24);
         
@@ -109,7 +109,7 @@ class ApiController extends Controller
     {
         $validatedRequestData = $request->validated();
 
-        $userEmail = $request['cliente'];
+        $userEmail = $validatedRequestData['cliente'];
 
         $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)
         ->join('productos', 'detalles_pedidos.producto_id', '=', 'productos.id')
