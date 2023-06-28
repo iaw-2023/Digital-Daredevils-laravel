@@ -12,7 +12,7 @@
             <h5 class="card-text"> {{$producto->precio}}</h5>
             <h5 class="card-text"> {{$producto->marca}}</h5>
             <h5 class="card-text"> {{$producto->categoria->nombre}}</h5>
-            <h5 href="/productos" class="btn btn-dark">Go Back</h5>
+            <a href="/productos" class="btn btn-dark">Go Back</a>
         </div>
     </div>
 </div>
