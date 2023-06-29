@@ -104,7 +104,9 @@ class CategoriasController extends Controller
         $imagePublicId = $categoria['public_id'];
 
         if(isset($requestData['imagen_ruta'])){
-            Cloudinary::destroy($imagePublicId);
+            if(!is_null($imagePublicId)){
+                Cloudinary::destroy($imagePublicId);
+            }
             $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
             $realPath = $fileInfo->getRealPath();
             $cloudinaryResponse=cloudinary()->upload($realPath,['folder'=>'Categorias']);
@@ -127,7 +129,9 @@ class CategoriasController extends Controller
     public function destroy(Categoria $categoria)
     {
         $imagePublicId = $categoria['public_id'];
-        Cloudinary::destroy($imagePublicId);
+        if(!is_null($imagePublicId)){
+            Cloudinary::destroy($imagePublicId);
+        }
         $categoria->delete();
         return back()->with('success','Categoría removida con éxito');
     }

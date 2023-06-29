@@ -101,9 +101,12 @@ class ProductosController extends Controller
         $requestData = $request->validated();
         $imageUrl = $producto['imagen_ruta'];
         $imagePublicId = $producto['public_id'];
-
+        
         if(isset($requestData['imagen_ruta'])){
-            Cloudinary::destroy($imagePublicId);
+            if(!is_null($imagePublicId)){
+                Cloudinary::destroy($imagePublicId);
+            }
+        
             $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
             $realPath = $fileInfo->getRealPath();
             $cloudinaryResponse=cloudinary()->upload($realPath,['folder'=>'Productos']);
@@ -130,7 +133,9 @@ class ProductosController extends Controller
     public function destroy(Producto $producto)
     {
         $imagePublicId = $producto['public_id'];
-        Cloudinary::destroy($imagePublicId);
+        if(!is_null($imagePublicId)){
+            Cloudinary::destroy($imagePublicId);
+        }
         $producto->delete();
         return back()->with('success','Producto removido con éxito');
     }
