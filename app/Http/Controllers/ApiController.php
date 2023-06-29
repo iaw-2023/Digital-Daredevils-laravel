@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GetPedidoRequest;
 use App\Models\Categoria;
 use App\Models\DetallesPedido;
 use App\Models\Producto;
@@ -94,7 +95,7 @@ class ApiController extends Controller
         return $this->responseOrError($categoria, 'Categoria no encontrada');
     }
 
-    public function pedidosUsuario(Request $request)
+    public function pedidosUsuario(GetPedidoRequest $request)
     {
         $validatedRequestData = $request->validated();
         var_dump($validatedRequestData);
@@ -105,10 +106,11 @@ class ApiController extends Controller
         return $this->responseOrError($pedidos, 'Pedidos no encontrados para ese email');
     }
 
-    public function detallesPedido(Request $request, $pedido_id)
+    public function detallesPedido(GetPedidoRequest $request, $pedido_id)
     {
+        $this->validateId($pedido_id);
         $validatedRequestData = $request->validated();
-
+        
         $userEmail = $validatedRequestData['cliente'];
 
         $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)
