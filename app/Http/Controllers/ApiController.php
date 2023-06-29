@@ -114,7 +114,7 @@ class ApiController extends Controller
 
         $detallesPedido = DetallesPedido::where('pedido_id', $pedido_id)
         ->join('productos', 'detalles_pedidos.producto_id', '=', 'productos.id')
-        ->join('pedidos', 'detalles_pedidos.producto_id', '=', 'pedidos.pedido_id')
+        ->join('pedidos', 'detalles_pedidos.pedido_id', '=', 'pedidos.id')
         ->get();
 
         if ($detallesPedido){
