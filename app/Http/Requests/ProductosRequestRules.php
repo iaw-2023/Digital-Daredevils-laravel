@@ -10,7 +10,7 @@ class ProductosRequestRules
     public static function getValidationRules(): array
     {
         return [
-            'precio' => 'required|numeric|min:1|max:1000000|regex:/^\d+(\.\d{1,2})?$/',
+            'precio' => 'required|numeric|min:1|max:100000000|regex:/^\d+(\.\d{1,2})?$/',
             'imagen_ruta' => ['nullable','image'],
             'modelo' => 'required|max:100',
             'marca' => 'required|max:100',

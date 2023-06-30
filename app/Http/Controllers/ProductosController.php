@@ -39,6 +39,8 @@ class ProductosController extends Controller
      */
     public function store(StoreProductoRequest $request)
     {
+        $imageUrl = null;
+        $imagePublicId = null;
         $requestData = $request->validated();
         if(isset($requestData['imagen_ruta'])){
             $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
@@ -101,7 +103,6 @@ class ProductosController extends Controller
         $requestData = $request->validated();
         $imageUrl = $producto['imagen_ruta'];
         $imagePublicId = $producto['public_id'];
-        
         if(isset($requestData['imagen_ruta'])){
             if(!is_null($imagePublicId)){
                 Cloudinary::destroy($imagePublicId);

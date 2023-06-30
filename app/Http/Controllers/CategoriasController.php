@@ -40,7 +40,8 @@ class CategoriasController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-       
+       $imageUrl = null;
+       $imagePublicId = null;
        $requestData = $request->validated();
        if(isset($requestData['imagen_ruta'])){
         $fileInfo = new SplFileInfo($requestData['imagen_ruta']);
