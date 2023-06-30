@@ -7,7 +7,8 @@
     <label class="form-label">Precio</label>
     <div class="input-group">
         <span class="input-group-text">$</span>
-        <input type="number" name="precio" class="form-control @error('precio') is-invalid @enderror bg-white" value="{{ isset($producto)  ? $producto->precio : old('precio') }}" step="any" required>
+        <input type="number" name="precio" class="form-control @error('precio') is-invalid @enderror bg-white" value="{{ isset($producto)  ? $producto->precio : old('precio') }}" step="any" max="9999999" required>
+
     </div>
     @error('precio')
         <span class="text-danger">
