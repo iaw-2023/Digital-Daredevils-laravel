@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Pedido extends Model
 {
-    protected $fillable = ['cliente','fecha'];
+    protected $fillable = ['cliente','fecha', 'mercadopagoPaymentId'];
     protected $guarded = ['id'];
 
     use HasFactory;

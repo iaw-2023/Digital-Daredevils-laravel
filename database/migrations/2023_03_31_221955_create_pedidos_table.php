@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cliente');
             $table->date('fecha');
+            $table->integer('mercadopagoPaymentId');
             $table->timestamps();
         });
     }

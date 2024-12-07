@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pedido_id')->constrained()
                   ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                  ->onDelete('cascade');
             $table->foreignId('producto_id')->constrained()
                   ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                  ->onDelete('cascade');
             $table->integer('cantidad')->default(1);
             $table->timestamps();
         });

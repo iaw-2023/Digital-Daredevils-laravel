@@ -14,7 +14,7 @@ class PedidosTableSeeder extends Seeder
     public function run(): void
     {
         Pedido::factory()->count(50)
-            ->has(Producto::factory()->count(rand(1, 50)))
+            ->has(Producto::factory()->count(rand(1, 25)))
         ->create();
     }
 }

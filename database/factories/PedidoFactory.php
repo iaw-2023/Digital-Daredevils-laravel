@@ -21,6 +21,7 @@ class PedidoFactory extends Factory
         return [
             'cliente'=>fake()->email(),
             'fecha'=>fake()->dateTime(),
+            'mercadopagoPaymentId'=>fake()->randomNumber(),
         ];
     }
 }
